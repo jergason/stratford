@@ -1,10 +1,6 @@
 // @flow
 import { getReview, getReviews, __emptyCache } from "./api";
-import fetch from "node-fetch-polyfill";
 import nock from "nock";
-
-// we need to override the built in fetch so nock can catch our requests
-global.fetch = fetch;
 
 beforeEach(__emptyCache);
 afterEach(() => nock.cleanAll());

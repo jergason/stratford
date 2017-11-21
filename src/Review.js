@@ -12,7 +12,8 @@ function Rating({ rating }) {
   );
 }
 
-function Byline({ author, publish_date }) {
+// export for testing
+export function Byline({ author, publish_date }: $Shape<ReviewT>) {
   let date = format(publish_date, "MMM. Do, YYYY");
   if (date === "Invalid Date") {
     date = "";

@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { getReview } from "./api";
-import { Review } from "./ReviewSummary";
+import { Review } from "./Review";
 import type { Review as ReviewT } from "./api";
 
 export default function ReviewDetail() {
@@ -23,8 +23,7 @@ type Props = {
   match: {
     params: {
       id: string
-    },
-    url: string
+    }
   }
 };
 
@@ -36,7 +35,7 @@ type ActualState =
 
 type State = { union: ActualState };
 
-class SmartReview extends Component<Props, State> {
+export class SmartReview extends Component<Props, State> {
   state = {
     union: {
       status: "loading"
@@ -47,18 +46,17 @@ class SmartReview extends Component<Props, State> {
     this.loadReview(this.props.match.params.id);
   }
 
-  loadReview(id) {
+  loadReview(id: string) {
     this.setState({ union: { status: "loading" } });
     getReview(id)
       .then(review => this.setState({ union: { status: "loaded", review } }))
-      .catch(error => this.setState({ union: { status: "error", error } }));
+      .catch(error => {
+        console.error("error loading review", error);
+        this.setState({ union: { status: "error", error } });
+      });
   }
 
   componentWillReceiveProps(props: Props) {
-    console.log("im getting called yo", {
-      oldId: this.props.match.params.id,
-      newId: props.match.params.id
-    });
     this.loadReview(props.match.params.id);
   }
 
@@ -75,7 +73,6 @@ class SmartReview extends Component<Props, State> {
     } else if (union.status === "loaded") {
       return <Review review={union.review} />;
     } else if (union.status === "error") {
-      console.error(union.error);
       return (
         <div>
           <h2>Couldn't load the review for some reason?</h2>
