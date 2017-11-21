@@ -17,7 +17,7 @@ export type Review = {
   body: string
 } & ReviewSummary;
 
-const HOST = "https://shakespeare.podium.co";
+const HOST = "http://shakespeare.podium.co";
 // in a real app I'd paramaterize this instead of hardcode it
 // but as somebody said
 // the course of true love never did run smooth
