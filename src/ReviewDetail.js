@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { getReview } from "./api";
-import Review from "./Review";
+import { Review } from "./ReviewSummary";
 import type { Review as ReviewT } from "./api";
 
 export default function ReviewDetail() {
@@ -48,13 +48,18 @@ class SmartReview extends Component<Props, State> {
   }
 
   loadReview(id) {
-    getReview(this.props.match.params.id)
+    this.setState({ union: { status: "loading" } });
+    getReview(id)
       .then(review => this.setState({ union: { status: "loaded", review } }))
       .catch(error => this.setState({ union: { status: "error", error } }));
   }
 
-  componentWillReceiveNewProps(newProps: Props) {
-    this.loadReview(newProps.match.params.id);
+  componentWillReceiveProps(props: Props) {
+    console.log("im getting called yo", {
+      oldId: this.props.match.params.id,
+      newId: props.match.params.id
+    });
+    this.loadReview(props.match.params.id);
   }
 
   renderBody() {
@@ -81,6 +86,6 @@ class SmartReview extends Component<Props, State> {
   }
 
   render() {
-    return <div className="column">{this.renderBody()}</div>;
+    return <div className="column review-detail">{this.renderBody()}</div>;
   }
 }

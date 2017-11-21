@@ -1,17 +1,13 @@
 // @flow
-import React, { Component } from "react";
+import React from "react";
 import format from "date-fns/format";
-import { Link } from "react-router-dom";
-import type { ReviewSummary as ReviewSummaryT } from "./api";
+import { NavLink } from "react-router-dom";
+import type { ReviewSummary as ReviewSummaryT, Review as ReviewT } from "./api";
 
-type Props = {
-  review: ReviewSummaryT
-};
-
-function Title({ rating }) {
+function Rating({ rating }) {
   return (
     <div>
-      <h3>{rating} out of 5</h3>
+      <strong>{rating} out of 5</strong>
     </div>
   );
 }
@@ -25,24 +21,34 @@ function Byline({ author, publish_date }) {
   return (
     <div className="byline">
       <p>
-        By <span className="author">{author}</span>
+        By <span className="author is-uppercase">{author}</span>
       </p>
       <p>
-        <span className="date">{date}</span>
+        <span className="date is-uppercase">{date}</span>
       </p>
     </div>
   );
 }
 
-export default class ReviewSummary extends Component<Props> {
-  render() {
-    const { rating, publish_date, id, author } = this.props.review;
-    return (
-      <article>
-        <Title rating={rating} />
-        <Byline author={author} publish_date={publish_date} />
-        <Link to={`/reviews/${id}`}>Review</Link>
-      </article>
-    );
-  }
+export function ReviewSummary(props: { review: ReviewSummaryT }) {
+  const { rating, publish_date, id, author } = props.review;
+  return (
+    <article className="review-summary">
+      <Rating rating={rating} />
+      <Byline author={author} publish_date={publish_date} />
+      <NavLink to={`/reviews/${id}`}>Read Review</NavLink>
+    </article>
+  );
+}
+
+export function Review(props: { review: ReviewT }) {
+  const { rating, publish_date, author, body } = props.review;
+  return (
+    <article className="review">
+      <h2 className="title is-3">Featured Review</h2>
+      <Rating rating={rating} />
+      <Byline author={author} publish_date={publish_date} />
+      <p>{body}</p>
+    </article>
+  );
 }

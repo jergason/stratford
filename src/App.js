@@ -14,7 +14,7 @@ class App extends Component {
           <header className="hero">
             <div className="hero-body">
               <div className="container">
-                <h1 className="title">The Stratford Times</h1>
+                <h1 className="title is-1">The Stratford Times</h1>
                 <h2 className="subtitle">
                   All The Reviews That Are Fit To Print
                 </h2>

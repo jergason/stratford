@@ -20,8 +20,6 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.16",
-    "@storybook/addon-links": "^3.2.16",
     "@storybook/react": "^3.2.16",
     "enzyme": "3.2.0",
     "enzyme-adapter-react-16": "1.1.0",

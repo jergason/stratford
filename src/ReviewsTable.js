@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 
 import { getReviews } from "./api";
-import ReviewSummary from "./ReviewSummary";
+import { ReviewSummary } from "./ReviewSummary";
 import type { ReviewSummary as ReviewSummaryT } from "./api";
 
 // workaround for setState not working with tagged unions (see https://github.com/facebook/flow/issues/3341)
@@ -64,7 +64,7 @@ class ReviewsTable extends Component<Props, State> {
   }
 
   render() {
-    return <div className="column">{this.renderBody()}</div>;
+    return <div className="column reviews-table">{this.renderBody()}</div>;
   }
 }
 

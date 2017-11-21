@@ -31,6 +31,32 @@ body {
   }
 }
 
-.master-detail {
-  display: flex;
+.reviews-table .review-summary {
+  margin-top: 2em;
+  border-bottom: 1px solid grey;
+}
+
+.reviews-table .review-summary:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .review-detail {
+    max-width: 50vw;
+    margin-left: -50vw;
+    position: fixed;
+  }
+
+  .review-summary {
+    max-width: 40vw;
+  }
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+a.active {
+  color: green;
 }
