@@ -1,6 +1,6 @@
 // @flow
 
-const cache = {};
+const cache = { reviews: {} };
 
 type Data<T> = {
   data: T

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import format from "date-fns/format";
+import { Link } from "react-router-dom";
 import type { ReviewSummary as ReviewSummaryT } from "./api";
 
 type Props = {
@@ -40,6 +41,7 @@ export default class ReviewSummary extends Component<Props> {
       <article>
         <Title rating={rating} />
         <Byline author={author} publish_date={publish_date} />
+        <Link to={`/reviews/${id}`}>Review</Link>
       </article>
     );
   }

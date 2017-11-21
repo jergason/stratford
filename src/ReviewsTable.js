@@ -30,7 +30,7 @@ class ReviewsTable extends Component<Props, State> {
       .catch(error => this.setState({ union: { status: "error", error } }));
   }
 
-  render() {
+  renderBody() {
     const { union } = this.state;
     if (union.status === "loading") {
       return (
@@ -54,6 +54,10 @@ class ReviewsTable extends Component<Props, State> {
         </div>
       );
     }
+  }
+
+  render() {
+    return <div className="column">{this.renderBody()}</div>;
   }
 }
 

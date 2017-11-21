@@ -30,3 +30,7 @@ body {
     opacity: 0.2;
   }
 }
+
+.master-detail {
+  display: flex;
+}
