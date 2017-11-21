@@ -10,11 +10,6 @@ export default function ReviewDetail() {
   return (
     <div>
       <Route path="/reviews/:id" component={SmartReview} />
-      <Route
-        exact
-        path="/reviews"
-        render={() => <div>Nothing to see here</div>}
-      />
     </div>
   );
 }

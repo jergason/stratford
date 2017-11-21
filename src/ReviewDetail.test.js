@@ -3,11 +3,10 @@ jest.mock("./api");
 /* eslint-disable import/first */
 import React from "react";
 import { shallow } from "enzyme";
-//import jest from "jest";
 import { SmartReview } from "./ReviewDetail";
 
-// load our mocked version so we can wait until it is done :(
-// this sucks
+// load our mocked version so we can wait until async work is done
+// $FlowFixMe
 import { getReview, setShouldFail } from "./api";
 
 const mockProps = {
@@ -15,7 +14,7 @@ const mockProps = {
 };
 
 it("renders in a loading state", () => {
-  // don't fire off requests
+  // don't fire off lifecycle methods os we can just test initial state
   const detail = shallow(<SmartReview {...mockProps} />, {
     disableLifecycleMethods: true
   });
@@ -27,9 +26,9 @@ it("renders a review when the api request succeeds", () => {
   setShouldFail(false);
   const detail = shallow(<SmartReview {...mockProps} />);
 
-  return getReview("whatever").then(() => {
-    return expect(detail.state("union")).toMatchObject({ status: "loaded" });
-  });
+  return getReview("whatever").then(() =>
+    expect(detail.state("union")).toMatchObject({ status: "loaded" })
+  );
 });
 
 function sleep(duration) {

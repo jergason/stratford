@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import ReviewsTable from "./ReviewsTable";
 import ReviewDetail from "./ReviewDetail";
 
@@ -21,9 +26,17 @@ class App extends Component {
               </div>
             </div>
           </header>
-          <div className="section columns">
-            <ReviewsTable />
-            <ReviewDetail />
+          <div>
+            <Redirect from="/" to="/reviews" />
+            <Route
+              path="/reviews"
+              render={() => (
+                <div className="section columns">
+                  <ReviewsTable />
+                  <ReviewDetail />
+                </div>
+              )}
+            />
           </div>
         </div>
       </Router>
