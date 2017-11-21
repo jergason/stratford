@@ -1,6 +1,6 @@
 // @flow
 
-const cache = { reviews: {} };
+const cache = { reviews: {}, reviewSummaries: undefined };
 
 type Data<T> = {
   data: T
@@ -17,6 +17,7 @@ export type Review = {
   body: string
 } & ReviewSummary;
 
+const HOST = "https://shakespeare.podium.co";
 // in a real app I'd paramaterize this instead of hardcode it
 // but as somebody said
 // the course of true love never did run smooth
@@ -26,19 +27,15 @@ const headers = {
 };
 
 function fetchReviews(): Promise<Array<ReviewSummary>> {
-  return fetch("//shakespeare.podium.co/api/reviews", { headers })
+  return fetch(`${HOST}/api/reviews`, { headers })
     .then(res => res.json())
-    .then((reviews: Data<Array<ReviewSummary>>) => {
-      return reviews.data;
-    });
+    .then((reviews: Data<Array<ReviewSummary>>) => reviews.data);
 }
 
 function fetchReview(id): Promise<Review> {
-  return fetch(`//shakespeare.podium.co/api/reviews/${id}`, { headers })
+  return fetch(`${HOST}/api/reviews/${id}`, { headers })
     .then(res => res.json())
-    .then((review: Data<Review>) => {
-      return review.data;
-    });
+    .then((review: Data<Review>) => review.data);
 }
 
 export async function getReviews(): Promise<Array<ReviewSummary>> {
@@ -60,4 +57,10 @@ export async function getReview(id: string): Promise<Review> {
   const review = await fetchReview(id);
   cache.reviews[id] = review;
   return review;
+}
+
+// for testing
+export function __emptyCache() {
+  cache.reviews = {};
+  cache.reviewSummaries = undefined;
 }

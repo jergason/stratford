@@ -25,9 +25,16 @@ class ReviewsTable extends Component<Props, State> {
   };
 
   componentDidMount() {
+    console.log("geting reviews!");
     getReviews()
-      .then(reviews => this.setState({ union: { status: "loaded", reviews } }))
-      .catch(error => this.setState({ union: { status: "error", error } }));
+      .then(reviews => {
+        console.log("got my reviews yo", reviews);
+        this.setState({ union: { status: "loaded", reviews } });
+      })
+      .catch(error => {
+        console.error(error);
+        this.setState({ union: { status: "error", error } });
+      });
   }
 
   renderBody() {
@@ -50,7 +57,7 @@ class ReviewsTable extends Component<Props, State> {
       return (
         <div>
           <h2>Oh dang, something went wrong:</h2>
-          <p>{union.error}</p>
+          <p>{union.error.message}</p>
         </div>
       );
     }

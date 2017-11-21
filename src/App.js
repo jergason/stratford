@@ -21,7 +21,7 @@ class App extends Component {
               </div>
             </div>
           </header>
-          <div className="section master-detail">
+          <div className="section columns">
             <ReviewsTable />
             <ReviewDetail />
           </div>

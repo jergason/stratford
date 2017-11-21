@@ -23,6 +23,8 @@
     "@storybook/addon-actions": "^3.2.16",
     "@storybook/addon-links": "^3.2.16",
     "@storybook/react": "^3.2.16",
+    "enzyme": "3.2.0",
+    "enzyme-adapter-react-16": "1.1.0",
     "flow-bin": "0.59.0",
     "nock": "9.1.0",
     "node-fetch-polyfill": "2.0.6"
